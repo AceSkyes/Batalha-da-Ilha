@@ -11,9 +11,9 @@ public class Example : MonoBehaviour
 {
     void Start()
     {
-        // A correct website page.
-       //StartCoroutine(GetRequest("http://localhost/projetosalgado/Conexão.php"));
+        //StartCoroutine(GetRequest("http://localhost/projetosalgado/Conexão.php"));
         //StartCoroutine(Logar("usuario1", "senha1"));
+        StartCoroutine(Registrar("usuario2", "senha2"));
     }
 
     public IEnumerator GetRequest(string uri)
@@ -58,6 +58,29 @@ public class Example : MonoBehaviour
         else
         {
             Debug.Log(www.downloadHandler.text);
+            
         }
     }
+
+    public IEnumerator Registrar(string validusuario, string validsenha)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("login", validusuario);
+        form.AddField("senha", validsenha);
+
+        using UnityWebRequest www = UnityWebRequest.Post("http://localhost/projetosalgado/Register.php", form);
+        yield return www.SendWebRequest();
+
+        if (www.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError(www.error);
+        }
+        else
+        {
+            Debug.Log(www.downloadHandler.text);
+            
+        }
+    }
+
+
 }
