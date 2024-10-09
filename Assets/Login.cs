@@ -16,7 +16,9 @@ public class Login : MonoBehaviour
         LoginButton.onClick.AddListener(() => {
 
            StartCoroutine(Main.Instance.net.Logar(UsernameInput.text, PasswordInput.text));
+            
 
+        
         });
     }
 
